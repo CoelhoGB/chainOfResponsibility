@@ -1,26 +1,28 @@
 package com.cor;
-import java.util.Scanner;
-
 
 public class Server 
 {
 
-    Scanner scanner = new Scanner(System.in);
-    Client client = new Client();
-    DBManager manager = new DBManager();
-    public static void main( String[] args ){
+    Client client;
+    LoginAuth loginAuth;
+    LoginReg loginReg;
+    Logger logger;
+    Validator validator;
 
-        
+    public Server(){}
 
+    public Server(Client client, LoginAuth loginAuth, LoginReg loginReg, Logger logger, Validator validator){
+        this.client = client;
+        this.loginAuth = loginAuth;
+        this.loginReg = loginReg;
+        this.logger = logger;
+        this.validator =  validator;
+        startService();
     }
 
     public void startService(){
 
-        System.out.println( "Bem vindo(a) ao sistema!\nInsira seu email para começarmos. (Padrão: exemplo@email.com)" );
-        String emailInput = scanner.nextLine();
-        
+        String startMessage = "Bem vindo(a) ao sistema!\nJá és usuário?";
+        client.waitInput(startMessage);
     }
-
-
-
 }
