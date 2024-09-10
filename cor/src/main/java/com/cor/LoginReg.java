@@ -3,6 +3,7 @@ package com.cor;
 public class LoginReg {
 
     Logger logger;
+    String email;
     
     public LoginReg(){}
 
@@ -10,4 +11,7 @@ public class LoginReg {
         this.logger = logger;
     }
 
+    public void createAccount(String response){
+
+    }
 }

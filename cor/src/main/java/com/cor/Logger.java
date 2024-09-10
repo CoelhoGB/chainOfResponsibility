@@ -28,11 +28,9 @@ public class Logger {
             if(response.matches("^(?i)(Sim|S|Nao|N)$")){
                 if(result){
                     log = "User response ok, log-in action.";
-                    userAction = "log";
                 }
                 else{
                     log = "User response ok, register action.";
-                    userAction = "reg";
                 }
             }
             else{

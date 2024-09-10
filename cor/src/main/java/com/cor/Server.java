@@ -27,12 +27,13 @@ public class Server
 
     public void responseError(String result){
         if(result.matches("^rpErr.*")){
-            client.waitInput("Por favor, responda novamente com Sim/S ou Nao/N.");
-        }
-        else if(result.matches("(@Err)")){
 
         }
-        else if(result.matches("(pwErr)")){
+        else if(result.matches("^@Err.*")){
+
+        }
+        else if(result.matches("^pwErr.*")){
+
         }
         else{
             System.out.println("Logging Error.");

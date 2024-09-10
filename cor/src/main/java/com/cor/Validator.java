@@ -38,12 +38,14 @@ public class Validator {
     Logger logger;
     LoginAuth loginAuth;
     Behaviors mode;
+    Client client;
 
     public Validator(){}
 
-    public void setter(Logger logger, LoginAuth loginAuth){
+    public void setter(Logger logger, LoginAuth loginAuth, Client client){
         this.logger = logger;
         this.loginAuth = loginAuth;
+        this.client = client;
     }
 
     public void setMode(int behaviour){
@@ -53,20 +55,22 @@ public class Validator {
     public void responseEndpoint(String response){
         switch (mode) {
             case Behaviors.init:
-                System.out.println("Validator is Initialized");
                 break;
 
             case Behaviors.response:
                 if(truePat.matcher(response).matches()){
                     this.setMode(2);
                     logger.createLog(response, Behaviors.response.name(), true);
+                    client.waitInput("Insira o seu email.");
                 }
                 else if(falsePat.matcher(response).matches()){
                     this.setMode(2);
                     logger.createLog(response, Behaviors.response.name(), false);
+                    client.waitInput("Insira o email que deseja utilizar para sua conta.\nPadrão: 'nome@provedor.com'");
                 }
                 else{
                     logger.createLog(response, Behaviors.response.name(), false);
+                    client.waitInput("Por favor, responda novamente com Sim/S ou Nao/N.");
                 }
                 break;
 
@@ -74,9 +78,11 @@ public class Validator {
                 if(emailPat.matcher(response).matches()){
                     this.setMode(3);
                     logger.createLog(response, Behaviors.email.name(), true);
+                    client.waitInput("Insira a sua senha com no mínimo 8 caracteres, compostos de letras, números ou caracteres especiais(@$!%*?&).");
                 }
                 else{
                     logger.createLog(response, Behaviors.email.name(), false);
+                    client.waitInput("Formato de email inválido. Siga o padrão 'nome@provedor.com");
                 }
                 break;
 
@@ -87,11 +93,11 @@ public class Validator {
                 }
                 else{
                     logger.createLog(response, Behaviors.password.name(), false);
+                    client.waitInput("Formato inválido, a senha deve ter letras, números ou caracteres especiais(@$!%*?&), e no mínimo 8 caracteres.");
                 }
                 break;
 
             case Behaviors.debug:
-            System.out.println("Validator is debugging");
                 break;
         }
     }
