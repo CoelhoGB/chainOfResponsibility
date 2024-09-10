@@ -7,8 +7,8 @@ public class Main {
         Server server = new Server();
         Logger logger = new Logger();
         Validator validator =  new Validator();
-        LoginAuth loginAuth = new LoginAuth(logger);
         LoginReg loginReg = new LoginReg(logger);
+        LoginAuth loginAuth = new LoginAuth(logger);
         Client client = new Client(validator);
 
         validator = new Validator(logger, loginAuth);

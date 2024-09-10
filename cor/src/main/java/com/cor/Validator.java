@@ -37,13 +37,17 @@ public class Validator {
     Pattern falsePat = Pattern.compile("^(?i)(Nao|N)$");
     Logger logger;
     LoginAuth loginAuth;
-    Behaviors mode = Behaviors.getBehaviour(0);
+    Behaviors mode;
 
-    public Validator(){}
+    public Validator(){
+        System.out.println("Validador vazio");}
 
     public Validator(Logger logger, LoginAuth loginAuth){
         this.loginAuth = loginAuth;
         this.logger = logger;
+        mode = Behaviors.getBehaviour(0);
+        System.out.println("Validador certo");
+        System.out.println(mode.name());
     }
 
     public String setMode(int behaviour){
@@ -52,6 +56,7 @@ public class Validator {
     }
 
     public void responseEndpoint(String response){
+        System.out.println(mode.name());
         switch (mode) {
             case Behaviors.init:
                 System.out.println("Validator is Initialized");
@@ -59,22 +64,36 @@ public class Validator {
 
             case Behaviors.response:
                 if(truePat.matcher(response).matches()){
-                    
+                    System.out.println("Foi sim");
+                    this.setMode(2);
+                    logger.createLog(response, mode.name(), true);
                 }
                 else if(falsePat.matcher(response).matches()){
-
+                    System.out.println("Foi nao");
+                    this.setMode(2);
+                    logger.createLog(response, mode.name(), false);
+                }
+                else{
+                    System.out.println("Foi bug");
+                    logger.createLog(response, mode.name(), false);
                 }
                 break;
 
             case Behaviors.email:
                 if(emailPat.matcher(response).matches()){
+                    this.setMode(3);
+                }
+                else{
 
                 }
                 break;
 
             case Behaviors.password:
                 if(passwordPat.matcher(response).matches()){
-
+                    this.setMode(1);
+                }
+                else{
+                    
                 }
                 break;
 

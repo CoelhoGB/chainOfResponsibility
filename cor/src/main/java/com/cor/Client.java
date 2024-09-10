@@ -1,7 +1,6 @@
 package com.cor;
 import java.util.Scanner;
 
-
 public class Client {
 
     Validator validator;
@@ -18,10 +17,7 @@ public class Client {
 
     public void waitInput(String message){
         System.out.println(message);
-        while(true){
-            response = input.nextLine();
-            validator.setMode(3);
-            validator.responseEndpoint(response);
-        }
+        response = input.nextLine();
+        validator.responseEndpoint(response);
     }
 }

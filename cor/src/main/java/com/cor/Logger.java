@@ -12,10 +12,7 @@ public class Logger {
     Server server;
     LoginAuth loginAuth;
     LoginReg loginReg;
-
-    Pattern emailPat = Pattern.compile("^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$");
-    Pattern passwordPat = Pattern.compile("^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$");
-    Pattern responsePat = Pattern.compile("^(?i)(Sim|S|Nao|N)$");
+    String userAction; //debug com: "log" ou "reg"
     
     public Logger(){}
 
@@ -31,9 +28,11 @@ public class Logger {
             if(response.matches("^(?i)(Sim|S|Nao|N)$")){
                 if(result){
                     log = "User response ok, log-in action";
+                    userAction = "log";
                 }
                 else{
                     log = "User response ok, register action";
+                    userAction = "reg";
                 }
             }
             else{
@@ -41,10 +40,49 @@ public class Logger {
             }
         }
         else if(action == "email"){
+            if(result){
+                log = "User email input ok.";
+                if(userAction == "log"){
+                    loginAuth.logUser(response);
+                }
+                else if(userAction == "reg"){
 
+                }
+            }
+            else{
+                
+                log = "User email input error. Cause:'" + response + "'";
+            }
         }
         else if(action == "password"){
+            if(result){
+                log = "User password input ok.";
+                if(userAction == "log"){
 
+                }
+                else if(userAction == "reg"){
+                    
+                }
+            }
+            else{
+                log = "User password input error. Cause:'" + response + "'";
+            }
+        }
+        else if(action == "login"){
+            if(result){
+                log = "User log-in successfull.";
+            }
+            else{
+                log = "User log-in error. Cause:'" + response + "'";
+            }
+        }
+        else if(action == "register"){
+            if(result){
+                log = "User register successfull.";
+            }
+            else{
+                log = "User register error. Cause:'" + response + "'";
+            }
         }
         else{
             log = "Log Error.";
