@@ -18,7 +18,10 @@ public class Client {
 
     public void waitInput(String message){
         System.out.println(message);
-        debug = input.nextLine();
-        System.out.println(debug);
+        while(true){
+            response = input.nextLine();
+            validator.setMode(3);
+            validator.responseEndpoint(response);
+        }
     }
 }

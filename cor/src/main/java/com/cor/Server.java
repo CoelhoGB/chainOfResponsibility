@@ -21,8 +21,23 @@ public class Server
     }
 
     public void startService(){
-
-        String startMessage = "Bem vindo(a) ao sistema!\nJá és usuário?";
+        String startMessage = "Bem vindo(a) ao sistema!\nJá és usuário?(Responda Sim/S ou Nao/N)";
+        validator.setMode(1);
         client.waitInput(startMessage);
+    }
+
+    public void responseError(String response){
+        if(response.matches("(rpErr)*")){
+
+        }
+        else if(response.matches("(@Err)*")){
+
+        }
+        else if(response.matches("(pwErr)*")){
+
+        }
+        else{
+            System.out.println("Logging Error.");
+        }
     }
 }
