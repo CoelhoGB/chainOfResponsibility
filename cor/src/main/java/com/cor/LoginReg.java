@@ -6,7 +6,7 @@ public class LoginReg {
     
     public LoginReg(){}
 
-    public void setLogger(Logger logger) {
+    public void setter(Logger logger) {
         this.logger = logger;
     }
 

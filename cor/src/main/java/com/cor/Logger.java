@@ -22,21 +22,23 @@ public class Logger {
         this.loginReg = loginReg;
     }
 
-    public void createLog(String response, String action, Boolean result){
+    public Boolean createLog(String response, String action, Boolean result){
         String log;
         if(action == "response"){
             if(response.matches("^(?i)(Sim|S|Nao|N)$")){
                 if(result){
-                    log = "User response ok, log-in action";
+                    log = "User response ok, log-in action.";
                     userAction = "log";
                 }
                 else{
-                    log = "User response ok, register action";
+                    log = "User response ok, register action.";
                     userAction = "reg";
                 }
             }
             else{
-                log = "User response error. Cause:'" + response + "'";
+                log = "rpErr: User response error. Cause: '" + response + "'";
+                System.out.println(log);
+                server.responseError(log);
             }
         }
         else if(action == "email"){
@@ -51,7 +53,7 @@ public class Logger {
             }
             else{
                 
-                log = "User email input error. Cause:'" + response + "'";
+                log = "@Err: User email input error. Cause: '" + response + "'";
             }
         }
         else if(action == "password"){
@@ -65,7 +67,7 @@ public class Logger {
                 }
             }
             else{
-                log = "User password input error. Cause:'" + response + "'";
+                log = "pwErr: User password input error. Cause: '" + response + "'";
             }
         }
         else if(action == "login"){
@@ -73,7 +75,7 @@ public class Logger {
                 log = "User log-in successfull.";
             }
             else{
-                log = "User log-in error. Cause:'" + response + "'";
+                log = "User log-in failed. Cause: '" + response + "'";
             }
         }
         else if(action == "register"){
@@ -81,7 +83,7 @@ public class Logger {
                 log = "User register successfull.";
             }
             else{
-                log = "User register error. Cause:'" + response + "'";
+                log = "User register failed. Cause: " + response;
             }
         }
         else{
@@ -89,11 +91,13 @@ public class Logger {
         }
 
         try {
-            Files.write(Paths.get("log.txt"), Collections.singletonList(log), 
-                        StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+            Files.write(Paths.get("log.txt"), Collections.singletonList(log),StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+            return true;
         } catch (IOException e) {
             System.err.println("Write Failure: " + e.getMessage());
+            return false;
         }
+
     }
 
 }

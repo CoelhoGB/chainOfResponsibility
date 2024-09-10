@@ -46,13 +46,11 @@ public class Validator {
         this.loginAuth = loginAuth;
     }
 
-    public String setMode(int behaviour){
+    public void setMode(int behaviour){
         mode = Behaviors.getBehaviour(behaviour);
-        return "Validator mode set: " + mode;
     }
 
     public void responseEndpoint(String response){
-        System.out.println(mode.name());
         switch (mode) {
             case Behaviors.init:
                 System.out.println("Validator is Initialized");
@@ -60,36 +58,35 @@ public class Validator {
 
             case Behaviors.response:
                 if(truePat.matcher(response).matches()){
-                    System.out.println("Foi sim");
                     this.setMode(2);
-                    logger.createLog(response, mode.name(), true);
+                    logger.createLog(response, Behaviors.response.name(), true);
                 }
                 else if(falsePat.matcher(response).matches()){
-                    System.out.println("Foi nao");
                     this.setMode(2);
-                    logger.createLog(response, mode.name(), false);
+                    logger.createLog(response, Behaviors.response.name(), false);
                 }
                 else{
-                    System.out.println("Foi bug");
-                    logger.createLog(response, mode.name(), false);
+                    logger.createLog(response, Behaviors.response.name(), false);
                 }
                 break;
 
             case Behaviors.email:
                 if(emailPat.matcher(response).matches()){
                     this.setMode(3);
+                    logger.createLog(response, Behaviors.email.name(), true);
                 }
                 else{
-
+                    logger.createLog(response, Behaviors.email.name(), false);
                 }
                 break;
 
             case Behaviors.password:
                 if(passwordPat.matcher(response).matches()){
                     this.setMode(1);
+                    logger.createLog(response, Behaviors.password.name(), true);
                 }
                 else{
-                    
+                    logger.createLog(response, Behaviors.password.name(), false);
                 }
                 break;
 

@@ -11,7 +11,7 @@ public class Client {
 
     public Client(){}
 
-    public void setValidador(Validator validator){
+    public void setter(Validator validator){
         this.validator = validator;
     }
 

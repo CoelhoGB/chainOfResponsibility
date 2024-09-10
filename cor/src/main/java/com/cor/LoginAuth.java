@@ -7,6 +7,7 @@ public class LoginAuth {
     String[] passwords = {"user1pass", "user2pass", "user3pass"};
     String selected;
     LoginReg loginReg;
+    String action; //"log" ou "reg"
     
     public LoginAuth(){
     }

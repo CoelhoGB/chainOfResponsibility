@@ -16,5 +16,6 @@ public class Main {
         logger.setter(server, loginAuth, loginReg);
         client.setter(validator);
         validator.setter(logger, loginAuth);
+        server.startService();
     }
 }
