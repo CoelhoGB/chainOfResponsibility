@@ -39,15 +39,11 @@ public class Validator {
     LoginAuth loginAuth;
     Behaviors mode;
 
-    public Validator(){
-        System.out.println("Validador vazio");}
+    public Validator(){}
 
-    public Validator(Logger logger, LoginAuth loginAuth){
-        this.loginAuth = loginAuth;
+    public void setter(Logger logger, LoginAuth loginAuth){
         this.logger = logger;
-        mode = Behaviors.getBehaviour(0);
-        System.out.println("Validador certo");
-        System.out.println(mode.name());
+        this.loginAuth = loginAuth;
     }
 
     public String setMode(int behaviour){

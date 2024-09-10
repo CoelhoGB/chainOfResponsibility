@@ -6,9 +6,14 @@ public class LoginAuth {
     String[] accounts = {"user1@email.com", "user2@email.com", "user3@email.com"};
     String[] passwords = {"user1pass", "user2pass", "user3pass"};
     String selected;
+    LoginReg loginReg;
     
-    public LoginAuth(Logger logger){
+    public LoginAuth(){
+    }
+
+    public void setter(Logger logger, LoginReg loginReg){
         this.logger = logger;
+        this.loginReg = loginReg;
     }
 
     public void logUser(String response){

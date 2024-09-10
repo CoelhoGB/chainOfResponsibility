@@ -16,7 +16,7 @@ public class Logger {
     
     public Logger(){}
 
-    public Logger(Server server, LoginAuth loginAuth, LoginReg loginReg){
+    public void setter(Server server, LoginAuth loginAuth, LoginReg loginReg){
         this.server = server;
         this.loginAuth = loginAuth;
         this.loginReg = loginReg;
@@ -95,4 +95,5 @@ public class Logger {
             System.err.println("Write Failure: " + e.getMessage());
         }
     }
+
 }
