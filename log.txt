@@ -1,0 +1,10 @@
+User response ok, register action.
+User email input ok.
+User password input ok.
+User registered successfully.
+User response ok, register action.
+User email input ok.
+User register failed. Cause: email already in userbase'
+User response ok, register action.
+User email input ok.
+User register failed. Cause: email already in userbase'

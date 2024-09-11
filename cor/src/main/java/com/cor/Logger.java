@@ -19,7 +19,7 @@ public class Logger {
         this.loginAuth = loginAuth;
     }
 
-    public void createLog(String response, String action, Boolean result){
+    public boolean createLog(String response, String action, Boolean result){
         String log;
         if(action == "response"){
             if(response.matches("^(?i)(Sim|S|Nao|N)$")){
@@ -75,19 +75,23 @@ public class Logger {
         }
         else if(action == "register"){
             if(result){
-                log = "User register successfull.";
+                log = "User registered successfully.";
                 log(log);
+                System.out.println("Registro criado.");
                 server.confirmLogin();
             }
             else{
                 log = "User register failed. Cause: " + response + "'";
                 log(log);
+                server.responseError("@Err");
+                return false;
             }
         }
         else{
             log = "Log Error.";
             log(log);
         }
+        return true;
     }
 
     private boolean log(String target){

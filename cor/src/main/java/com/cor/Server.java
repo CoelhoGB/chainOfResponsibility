@@ -35,6 +35,14 @@ public class Server
         else if(result.matches("^pwErr.*")){
 
         }
+        else if(result.matches("^logErr.*")){
+
+        }
+        else if(result.matches("^regErr.*")){
+            validator.setMode(1);
+            loginAuth.restart();
+            loginReg.restart();
+        }
         else{
             System.out.println("Logging Error.");
         }

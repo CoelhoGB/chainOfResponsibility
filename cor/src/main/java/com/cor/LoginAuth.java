@@ -30,9 +30,21 @@ public class LoginAuth {
     }
 
     public void logUser(String response){
-        if(registerAction){loginReg.createAccount(response);}
         if(email == null){
             email = response;
+        }
+        if(registerAction){
+            if(email == null){
+                for (int x = 0; x < accounts.size(); x++){
+                    if(accounts.get(x).compareTo(response) == 0){
+                        loginReg.createAccount("Invalid");
+                        registerAction = false;
+                        break;
+                    }
+                }
+                email = response;
+            }
+            loginReg.createAccount(response);
         }
         else{
             for (int x = 0; x < accounts.size(); x++){
@@ -43,19 +55,19 @@ public class LoginAuth {
                         break;
                     }
                     else{
-                        logger.createLog("password did not match", "login", false);
+                        logger.createLog("Password did not match", "login", false);
                     }
                 }
                 else{
-                    logger.createLog("email not found", "login", false);
+                    logger.createLog("Email not found", "login", false);
                 }
             }
         }
     }
 
-    public void addAccount(String email, String password){
-        accounts.add(email);
-        passwords.add(password);
+    public void restart(){
+        email = null;
+        registerAction = false;
     }
 }
 

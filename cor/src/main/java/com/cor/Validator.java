@@ -77,8 +77,12 @@ public class Validator {
             case Behaviors.email:
                 if(emailPat.matcher(response).matches()){
                     this.setMode(3);
-                    logger.createLog(response, Behaviors.email.name(), true);
-                    client.waitInput("Insira a sua senha com no mínimo 8 caracteres, compostos de letras, números ou caracteres especiais(@$!%*?&).");
+                    if(logger.createLog(response, Behaviors.email.name(), true)){
+                        client.waitInput("Insira a sua senha com no mínimo 8 caracteres, compostos de letras, números ou caracteres especiais(@$!%*?&).");
+                    }
+                    else{
+                        client.waitInput("Email já existente no sistema, deseja fazer login(Digite Sim/S) ou registrar outro email(Digite Nao/N)?");
+                    }
                 }
                 else{
                     logger.createLog(response, Behaviors.email.name(), false);
