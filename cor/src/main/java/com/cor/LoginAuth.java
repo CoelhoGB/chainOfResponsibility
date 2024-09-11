@@ -31,7 +31,8 @@ public class LoginAuth {
                 if(accounts[x].compareTo(email) == 0){
                     if(passwords[x].compareTo(response) == 0){
                         registerAction = false;
-                        logger.createLog("Login Ok", "login", false);
+                        logger.createLog("Login Ok", "login", true);
+                        break;
                     }
                     else{
                         logger.createLog("password did not match", "login", false);

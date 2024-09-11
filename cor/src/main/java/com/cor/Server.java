@@ -39,4 +39,8 @@ public class Server
             System.out.println("Logging Error.");
         }
     }
+
+    public void confirmLogin(){
+        client.login();
+    }
 }

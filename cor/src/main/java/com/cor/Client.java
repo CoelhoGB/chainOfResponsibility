@@ -21,7 +21,7 @@ public class Client {
         validator.responseEndpoint(response);
     }
 
-    public void logar(){
+    public void login(){
         loggedIn = true;
     }
 }
