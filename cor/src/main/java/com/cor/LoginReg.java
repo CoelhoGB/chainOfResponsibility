@@ -12,6 +12,8 @@ public class LoginReg {
     }
 
     public void createAccount(String response){
-
+        if(email == null){
+            email = response;
+        }
     }
 }

@@ -1,15 +1,23 @@
 package com.cor;
+import java.util.ArrayList;
+import java.util.List;
 
 public class LoginAuth {
 
     Logger logger;
-    String[] accounts = {"user1@email.com", "user2@email.com", "user3@email.com"};
-    String[] passwords = {"user1pass", "user2pass", "user3pass"};
+    List<String> accounts = new ArrayList<String>();
+    List<String> passwords = new ArrayList<String>();
     String email;
     LoginReg loginReg;
     Boolean registerAction = false;
     
     public LoginAuth(){
+        accounts.add("user1@email.com");
+        accounts.add("user2@email.com");
+        accounts.add("user3@email.com");
+        passwords.add("user1pass");
+        passwords.add("user2pass");
+        passwords.add("user3pass");
     }
 
     public void setter(Logger logger, LoginReg loginReg){
@@ -27,9 +35,9 @@ public class LoginAuth {
             email = response;
         }
         else{
-            for (int x = 0; x < accounts.length; x++){
-                if(accounts[x].compareTo(email) == 0){
-                    if(passwords[x].compareTo(response) == 0){
+            for (int x = 0; x < accounts.size(); x++){
+                if(accounts.get(x).compareTo(email) == 0){
+                    if(passwords.get(x).compareTo(response) == 0){
                         registerAction = false;
                         logger.createLog("Login Ok", "login", true);
                         break;
@@ -43,6 +51,11 @@ public class LoginAuth {
                 }
             }
         }
+    }
+
+    public void addAccount(String email, String password){
+        accounts.add(email);
+        passwords.add(password);
     }
 }
 

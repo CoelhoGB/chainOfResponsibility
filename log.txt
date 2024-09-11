@@ -1,4 +1,0 @@
-User response ok, log-in action.
-User email input ok.
-User password input ok.
-User log-in successfull.
