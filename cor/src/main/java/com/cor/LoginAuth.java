@@ -17,6 +17,10 @@ public class LoginAuth {
         this.loginReg = loginReg;
     }
 
+    public void setRegister(){
+        registerAction = true;
+    }
+
     public void logUser(String response){
         if(registerAction){loginReg.createAccount(response);}
         if(email == null){
@@ -24,10 +28,17 @@ public class LoginAuth {
         }
         else{
             for (int x = 0; x < accounts.length; x++){
-                if(email == accounts[x]){
-                    if(response == passwords[x]){
+                if(accounts[x].compareTo(email) == 0){
+                    if(passwords[x].compareTo(response) == 0){
                         registerAction = false;
+                        logger.createLog("Login Ok", "login", false);
                     }
+                    else{
+                        logger.createLog("password did not match", "login", false);
+                    }
+                }
+                else{
+                    logger.createLog("email not found", "login", false);
                 }
             }
         }

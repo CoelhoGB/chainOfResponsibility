@@ -20,4 +20,8 @@ public class Client {
         response = input.nextLine();
         validator.responseEndpoint(response);
     }
+
+    public void logar(){
+        loggedIn = true;
+    }
 }

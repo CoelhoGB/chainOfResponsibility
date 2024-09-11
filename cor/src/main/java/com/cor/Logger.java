@@ -1,6 +1,5 @@
 package com.cor;
 
-import java.util.regex.Pattern;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
@@ -16,10 +15,9 @@ public class Logger {
     
     public Logger(){}
 
-    public void setter(Server server, LoginAuth loginAuth, LoginReg loginReg){
+    public void setter(Server server, LoginAuth loginAuth){
         this.server = server;
         this.loginAuth = loginAuth;
-        this.loginReg = loginReg;
     }
 
     public Boolean createLog(String response, String action, Boolean result){
@@ -31,6 +29,7 @@ public class Logger {
                 }
                 else{
                     log = "User response ok, register action.";
+                    loginAuth.setRegister();
                 }
             }
             else{
@@ -42,12 +41,7 @@ public class Logger {
         else if(action == "email"){
             if(result){
                 log = "User email input ok.";
-                if(userAction == "log"){
-                    loginAuth.logUser(response);
-                }
-                else if(userAction == "reg"){
-
-                }
+                loginAuth.logUser(response);
             }
             else{
                 
@@ -57,12 +51,7 @@ public class Logger {
         else if(action == "password"){
             if(result){
                 log = "User password input ok.";
-                if(userAction == "log"){
-
-                }
-                else if(userAction == "reg"){
-                    
-                }
+                loginAuth.logUser(response);
             }
             else{
                 log = "pwErr: User password input error. Cause: '" + response + "'";

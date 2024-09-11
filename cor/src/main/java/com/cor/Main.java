@@ -13,7 +13,7 @@ public class Main {
 
         loginAuth.setter(logger, loginReg);
         loginReg.setter(logger);
-        logger.setter(server, loginAuth, loginReg);
+        logger.setter(server, loginAuth);
         client.setter(validator);
         validator.setter(logger, loginAuth, client);
         server.startService();
